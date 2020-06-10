@@ -612,23 +612,59 @@ public class LinkController extends MouseAdapter {
                 if (viewPort instanceof JViewport) {
                     // Only check bounds if parent is as expected
                     Point bounds = viewPort.getLocationOnScreen();
+
+                    int leftBound = bounds.x - 5;
+                    int topBound = bounds.y - 20;
+                    int rightBound = bounds.x + textPane.getWidth() + 10;
+                    int bottomBound = bounds.y + viewPort.getHeight();
+                    int popupHeight = labelSize.height + r.height + 4;
+                    int popupWidth = labelSize.width + r.width + 4;
+
                     // Top
-                    if (bounds.y - 20 > r.y) {
-                        r.y += labelSize.height + r.height + 4;
+                    if (topBound > r.y) {
+                        r.y += popupHeight;
                     }
                     // Bottom
                     if (bounds.y + viewPort.getHeight() < r.y + labelSize.height) {
-                        return null;
-                    }
-                    // Left
-                    int overLeftEdge = (bounds.x - 5) - r.x;
-                    if (overLeftEdge > 0) {
-                        r.x = r.x + overLeftEdge;
-                    }
-                    // Right
-                    int overRightEdge = (r.x + labelSize.width) - (bounds.x + textPane.getWidth() + 10);
-                    if (overRightEdge > 0) {
-                        r.x = r.x - overRightEdge;
+                        // Move to the middle
+                        r.y -= (popupHeight)/2;
+                        // Check the top bound first
+                        int overTopEdge = topBound - r.y;
+                        if (overTopEdge > 0) {
+                            r.y += overTopEdge;
+                        }
+                        // Then the bottom bound
+                        int overBottomEdge = (r.y + labelSize.height) - bottomBound;
+                        if (overBottomEdge > 0) {
+                            r.y -= overBottomEdge;
+                        }
+
+                        int offset = sourceWidth;
+                        // In case the element isn't an even width
+                        if (offset % 2 != 0)
+                            offset++;
+                        offset /= 2;
+
+                        // Place on the left
+                        r.x -= (popupWidth)/2 + offset;
+
+                        // Swap to the right if the left is out of bounds
+                        int overLeftEdge = leftBound - r.x;
+                        if (overLeftEdge > 0) {
+                            r.x += popupWidth + offset*2;
+                        }
+
+                    } else {
+	                    // Left
+	                    int overLeftEdge = leftBound - r.x;
+	                    if (overLeftEdge > 0) {
+	                        r.x = r.x + overLeftEdge;
+	                    }
+	                    // Right
+	                    int overRightEdge = r.x + labelSize.width - rightBound;
+	                    if (overRightEdge > 0) {
+	                        r.x = r.x - overRightEdge;
+	                    }
                     }
                 }
                 return new Point(r.x, r.y);
