@@ -18,11 +18,11 @@ build_script:
 #- cmd
 artifacts:
 - path: build\releases\*
-- path: build\libs\*
+#- path: build\libs\*
 cache:
   - C:\Users\appveyor\.gradle -> .appveyor.yml
   - .gradle -> .appveyor.yml
   - build\classes
-  - build\dependency-cache
+#  - build\dependency-cache
   - build\libs
   - build\resources
