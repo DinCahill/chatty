@@ -1,0 +1,28 @@
+version: '{build}'
+image: Visual Studio 2019
+init:
+- ps: if (0) { iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1')) } #rdp debug
+#environment:
+# may not need set for safety, gradlew use java from path first
+#  JAVA_HOME: C:\Program Files\Java\jdk11
+#  PATH: '%JAVA_HOME%\bin;%PATH%'
+#  APPVEYOR_RDP_PASSWORD:
+#    secure: K6XkhLVN7PZDnWWtrTKYneDPMS7FgBFYYe1xuU2s8js=
+build_script:
+- set JAVA_HOME=C:\Program Files\Java\jdk14
+- set PATH=%JAVA_HOME%\bin;%PATH%
+#- choco install gradle
+#- gradle release --no-daemon -x test
+#- gradlew wrapper --gradle-version=5.0-milestone-1 --no-daemon
+- gradlew release --no-daemon -x test
+#- cmd
+artifacts:
+- path: build\releases\*
+- path: build\libs\*
+cache:
+  - C:\Users\appveyor\.gradle -> .appveyor.yml
+  - .gradle -> .appveyor.yml
+  - build\classes
+  - build\dependency-cache
+  - build\libs
+  - build\resources
