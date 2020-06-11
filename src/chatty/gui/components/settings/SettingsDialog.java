@@ -122,6 +122,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
         CHAT("Chat", Language.getString("settings.page.chat")),
         NAMES("Names", Language.getString("settings.page.names")),
         MODERATION("Moderation", Language.getString("settings.page.moderation")),
+        CONTRIB("Contrib", "Contrib"),
         STREAM("Stream", Language.getString("settings.page.stream"));
         
         public final String name;
@@ -180,6 +181,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
             Page.HISTORY,
             Page.STREAM,
             Page.HOTKEYS,
+            Page.CONTRIB,
         }));
     }
 
@@ -271,6 +273,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
         cards.add(hotkeySettings, Page.HOTKEYS.name);
         cards.add(new CompletionSettings(this), Page.COMPLETION.name);
         cards.add(new ChatSettings(this), Page.CHAT.name);
+        cards.add(new ContribSettings(this), Page.CONTRIB.name);
         nameSettings = new NameSettings(this);
         cards.add(nameSettings, Page.NAMES.name);
         cards.add(new StreamSettings(this), Page.STREAM.name);

@@ -30,6 +30,7 @@ public class StyleManager implements StyleServer {
     private final static Logger LOGGER = Logger.getLogger(StyleManager.class.getName());
     
     public static final Set<String> settingNames = new HashSet<>(Arrays.asList(
+            "popupFixEnabled", // Contrib
             "font", "fontSize", "timestampEnabled", "emoticonsEnabled",
             "foregroundColor","infoColor","compactColor","backgroundColor",
             "backgroundColor2", "alternateBackground", "messageSeparator",
@@ -235,6 +236,9 @@ public class StyleManager implements StyleServer {
         addLongSetting(Setting.DISPLAY_NAMES_MODE, "displayNamesMode");
         
         colorCorrector = ColorCorrector.get(settings.getString("nickColorCorrection"));
+
+        // Contrib
+        addBooleanSetting(Setting.POPUP_FIX_ENABLED, "popupFixEnabled");
     }
     
     private void addBooleanSetting(Setting key, String name) {

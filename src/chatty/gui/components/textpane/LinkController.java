@@ -71,6 +71,8 @@ import javax.swing.text.html.HTML;
  */
 public class LinkController extends MouseAdapter {
     
+    private boolean popupFixEnabled; // Contrib
+
     private static final Cursor HAND_CURSOR = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
     private static final Cursor NORMAL_CURSOR = Cursor.getDefaultCursor();
     
@@ -461,6 +463,8 @@ public class LinkController extends MouseAdapter {
         private boolean contentSet;
         private Consumer<MyPopup> provider;
 
+        private boolean popupFixEnabled; // Contrib
+
         public MyPopup() {
             showTimer = new Timer(SHOW_DELAY, e -> {
                 showNow();
@@ -477,6 +481,11 @@ public class LinkController extends MouseAdapter {
             this.enabled = enabled;
         }
         
+        // Contrib
+        public void setPopupFixEnabled(boolean popupFixEnabled) {
+            this.popupFixEnabled = popupFixEnabled;
+        }
+
         public void show(JTextPane textPane, Element element, Consumer<MyPopup> provider, int sourceWidth) {
             if (!enabled) {
                 return;
@@ -626,6 +635,9 @@ public class LinkController extends MouseAdapter {
                     }
                     // Bottom
                     if (bounds.y + viewPort.getHeight() < r.y + labelSize.height) {
+                        // Contrib - Popup size fix
+                        if (!this.popupFixEnabled) return null;
+
                         // Move to the middle
                         r.y -= (popupHeight)/2;
                         // Check the top bound first
@@ -705,6 +717,11 @@ public class LinkController extends MouseAdapter {
     
     public void cleanUp() {
         popup.cleanUp();
+    }
+
+    // Contrib
+    public void setPopupFixEnabled(boolean popupFixEnabled) {
+        popup.setPopupFixEnabled(popupFixEnabled);
     }
 
     //===============

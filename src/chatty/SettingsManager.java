@@ -104,6 +104,12 @@ public class SettingsManager {
         settings.addFile(statusPresetsFile);
         
         //========
+        // Contrib
+        //========
+
+        settings.addBoolean("popupFixEnabled", true);
+
+        //========
         // General
         //========
 
