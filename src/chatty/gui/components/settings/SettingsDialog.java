@@ -96,6 +96,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
     private final NameSettings nameSettings;
     
     public enum Page {
+        CONTRIB("Contrib", "Contrib"),
         MAIN("Main", Language.getString("settings.page.main")),
         MESSAGES("Messages", Language.getString("settings.page.messages")),
         EMOTES("Emoticons", Language.getString("settings.page.emoticons")),
@@ -122,7 +123,6 @@ public class SettingsDialog extends JDialog implements ActionListener {
         CHAT("Chat", Language.getString("settings.page.chat")),
         NAMES("Names", Language.getString("settings.page.names")),
         MODERATION("Moderation", Language.getString("settings.page.moderation")),
-        CONTRIB("Contrib", "Contrib"),
         STREAM("Stream", Language.getString("settings.page.stream"));
         
         public final String name;
