@@ -181,8 +181,8 @@ public class SettingsDialog extends JDialog implements ActionListener {
             Page.HISTORY,
             Page.STREAM,
             Page.HOTKEYS,
-            Page.CONTRIB,
         }));
+        MENU.put(Page.CONTRIB, Arrays.asList(new Page[]{}));
     }
 
     public SettingsDialog(final MainGui owner, final Settings settings) {
