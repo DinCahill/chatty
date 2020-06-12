@@ -96,6 +96,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
     private final NameSettings nameSettings;
     
     public enum Page {
+        CONTRIB("Contrib", "Contrib"),
         MAIN("Main", Language.getString("settings.page.main")),
         MESSAGES("Messages", Language.getString("settings.page.messages")),
         EMOTES("Emoticons", Language.getString("settings.page.emoticons")),
@@ -181,6 +182,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
             Page.STREAM,
             Page.HOTKEYS,
         }));
+        MENU.put(Page.CONTRIB, Arrays.asList(new Page[]{}));
     }
 
     public SettingsDialog(final MainGui owner, final Settings settings) {
@@ -271,6 +273,7 @@ public class SettingsDialog extends JDialog implements ActionListener {
         cards.add(hotkeySettings, Page.HOTKEYS.name);
         cards.add(new CompletionSettings(this), Page.COMPLETION.name);
         cards.add(new ChatSettings(this), Page.CHAT.name);
+        cards.add(new ContribSettings(this), Page.CONTRIB.name);
         nameSettings = new NameSettings(this);
         cards.add(nameSettings, Page.NAMES.name);
         cards.add(new StreamSettings(this), Page.STREAM.name);

@@ -148,6 +148,7 @@ public class ChannelTextPane extends JTextPane implements LinkListener, Emoticon
     private boolean newlineRequired = false;
     
     public enum Setting {
+        POPUP_FIX_ENABLED, // Contrib
         TIMESTAMP_ENABLED, EMOTICONS_ENABLED, AUTO_SCROLL, USERICONS_ENABLED,
         
         SHOW_BANMESSAGES, COMBINE_BAN_MESSAGES, DELETE_MESSAGES,
@@ -3478,6 +3479,10 @@ public class ChannelTextPane extends JTextPane implements LinkListener, Emoticon
             linkController.setPopupEnabled(settings.get(Setting.SHOW_TOOLTIPS));
             linkController.setPopupImagesEnabled(settings.get(Setting.SHOW_TOOLTIP_IMAGES));
             linkController.setUserHoverHighlightMode(getInt(Setting.HIGHLIGHT_HOVERED_USER));
+
+            // Contrib
+            addSetting(Setting.POPUP_FIX_ENABLED, false);
+            linkController.setPopupFixEnabled(settings.get(Setting.POPUP_FIX_ENABLED));
         }
         
         /**
